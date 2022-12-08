@@ -83,7 +83,7 @@ const loadComponent = () => {
   //INSTRUCCIONES
   //LO QUE QUEREMOS LLEVAR A CABO
   loader.classList.add("hide")
-  } , 0)                            
+  } , 3000)                            
    } 
   document.addEventListener('DOMContentLoaded', ()=>{
 
