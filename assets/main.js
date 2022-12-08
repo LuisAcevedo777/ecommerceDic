@@ -19,6 +19,7 @@ const minusBtn = document.getElementById("minus")
 const eliminar = document.getElementById("cart-content")
 const caneca = document.getElementById("caneca")
 
+const checkBtn = document.getElementById("check")
 //conteo de click
 
 const spanCounter = document.querySelector("span.cart-counter");
@@ -28,6 +29,9 @@ const clickPlus3 = document.querySelector("span.tres")
 
 const clickPlus4 = document.querySelector("span.pl")
 
+// llamado en ventana ( quantitieSelected, price, checkout)
+const stockW = document.querySelector("#item-q")
+const priceW = document.querySelector("#item-p")
 //---------------------ARRAY----------------------------//
 
 
@@ -79,7 +83,7 @@ const loadComponent = () => {
   //INSTRUCCIONES
   //LO QUE QUEREMOS LLEVAR A CABO
   loader.classList.add("hide")
-  } , 0)                            
+  } , 3000)                            
    } 
   document.addEventListener('DOMContentLoaded', ()=>{
 
@@ -123,8 +127,8 @@ darkThemeChange()
  //AGREGAR A CARRITO------------------------------------------------------
 
 
-const cartProduct =[];
-         
+let cartProduct =[];
+    let acc = 0;     
   function addProduct(itemId){
     
     //condicion para saber si se puede agregar otro producto
@@ -133,20 +137,23 @@ const cartProduct =[];
 
    if(productSelected){
   let index = cartProduct.indexOf(productSelected)
-
+ 
   cartProduct[index].quantitySelected++
+  acc = acc + 1
+  stockW.textContent = acc
  
       if(cartProduct[index].quantitySelected > cartProduct[index].quantity){
         cartProduct[index].quantitySelected = cartProduct[index].quantity
-       
-            
+                       
       }
 
    }else{
       const item = items.find(item=> item.id ===itemId)
     item.quantitySelected = 1;
     cartProduct.push(item)
-
+    acc  = acc+1
+    stockW.textContent = acc
+    
    } 
    showProducts()
     console.log(cartProduct)
@@ -182,7 +189,8 @@ const cartProduct =[];
     <span class="pl" id="pl">+</span>
     <img class="caneca" id="caneca" src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""></div>
     </div></div>`
-
+ 
+   
     content.innerHTML = cadena
     
     })
@@ -238,8 +246,12 @@ clickPlus.addEventListener("click", ()=> sum(1) )
 clickPlus2.addEventListener("click", ()=> sum(2) )
 clickPlus3.addEventListener("click", ()=> sum(3) )
     
+//eliminar
 
-  
+checkBtn.addEventListener("click",()=>{
+
+  window.localStorage.removeItem("propiedad")
+})
 
  
   
