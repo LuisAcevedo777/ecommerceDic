@@ -12,8 +12,10 @@ const menuContainer= document.getElementById("menu-container")
 
 const minusBtn = document.getElementById("minus")
 
+//eliminar
 
-
+const eliminar = document.getElementById("cart-content")
+const caneca = document.getElementById("caneca")
 //cambiar a tema oscuro
 
 const darkThemeChange = () =>{
@@ -66,35 +68,6 @@ const clickPlus = document.querySelector("span.plus")
 const clickPlus2 = document.querySelector("span.dos")
 const clickPlus3 = document.querySelector("span.tres")
 
-
-let counter=0; 
-clickPlus.addEventListener("click", e=>{
-
-      
-    counter++
-    spanCounter.textContent=`${counter}`;
-    console.log(counter);
-    
-        })
-        clickPlus2.addEventListener("click", e=>{
-
-      
-            counter++
-            spanCounter.textContent=`${counter}`;
-            console.log(counter);
-            
-        })
-
-        clickPlus3.addEventListener("click", e=>{
-
-      
-            counter++
-            spanCounter.textContent=`${counter}`;
-            console.log(counter);
-             
-        })
-              
-    
     
    //AGREGAR A CARRITO
 
@@ -105,7 +78,8 @@ clickPlus.addEventListener("click", e=>{
       price: 14.00,
       image: './images/featured1.png',
       category: 'hoodies',
-      quantity: 10
+      quantity: 10,
+      quantitySelected: 0
     },
     {
       id: 2,
@@ -113,7 +87,8 @@ clickPlus.addEventListener("click", e=>{
       price: 24.00,
       image: './images/featured2.png',
       category: 'shirts',
-      quantity: 15
+      quantity: 15,
+      quantitySelected: 0
      
     },
     {
@@ -122,13 +97,15 @@ clickPlus.addEventListener("click", e=>{
       price: 24.00,
       image: './images/featured3.png',
       category: 'shirts',
-      quantity: 20
+      quantity: 20,
+      quantitySelected: 0
     }
   ]
 
   const cartProduct =[];
+           
   
-
+  
   function addProduct(itemId){
     
     //condicion para saber si se puede agregar otro producto
@@ -139,7 +116,12 @@ clickPlus.addEventListener("click", e=>{
   let index = cartProduct.indexOf(productSelected)
 
   cartProduct[index].quantitySelected++
-
+ 
+      if(cartProduct[index].quantitySelected > cartProduct[index].quantity){
+        cartProduct[index].quantitySelected = cartProduct[index].quantity
+       
+            
+      }
 
    }else{
       const item = items.find(item=> item.id ===itemId)
@@ -151,25 +133,38 @@ clickPlus.addEventListener("click", e=>{
     console.log(cartProduct)
   }
 
-  
+  let counter=0; 
+  let accu = 0;
+
   clickPlus.addEventListener("click", e=>{
-  
+     counter++
+     spanCounter.textContent=counter
     addProduct(1)
-    
+   
        })
 
     clickPlus2.addEventListener("click", e=>{
-  
+      counter++
+      spanCounter.textContent=counter
         addProduct(2)
        
     })
       
         clickPlus3.addEventListener("click", e=>{
-  
+          counter++
+          spanCounter.textContent=counter
             addProduct(3)
             
         })   
+for(let i=0; i<cartProduct.length;i++){
+  accu=accu+cartProduct[i].quantity
+  if(counter > accu){
 
+    spanCounter.textContent=accu
+  }
+
+}
+        
        
 
     
@@ -183,7 +178,7 @@ clickPlus.addEventListener("click", e=>{
            var ide = product.id
           
            
-    cadena +=  `<div class="photo">
+    cadena +=  `<div class="photo" id="cart-content">
     <img class="featured" src="${product.image}" alt="">
     <span class="id">${product.id}</span></div>
     <div class="description2">
@@ -194,17 +189,13 @@ clickPlus.addEventListener("click", e=>{
     <span class="price2">$${product.price}</span>
     </div>
     <span class="sub">Subtotal:$ ${product.price * product.quantitySelected}</span>
-    <div class="plus-minus"><span class="minus" id="minus">-</span><span>${product.quantitySelected} units</span><span class="pl" id="pl">+</span><img class="caneca" src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""></div>
+    <div class="plus-minus"><span class="minus" id="minus">-</span><span>${product.quantitySelected} units</span><span class="pl" id="pl">+</span><img class="caneca" id="caneca" src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""></div>
     </div>`
     
     content.innerHTML = cadena
 
     })
       } 
-//evento de click plus
-
-
-
 
 
       //DOCUMENT LOADED
