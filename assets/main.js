@@ -28,10 +28,16 @@ const clickPlus2 = document.querySelector("span.dos")
 const clickPlus3 = document.querySelector("span.tres")
 
 const clickPlus4 = document.querySelector("span.pl")
+const clickPlus5 = document.querySelector("span.pl2")
+const clickPlus6 = document.querySelector("span.pl3")
+
 
 // llamado en ventana ( quantitieSelected, price, checkout)
 const stockW = document.querySelector("#item-q")
 const priceW = document.querySelector("#item-p")
+
+
+
 //---------------------ARRAY----------------------------//
 
 
@@ -83,12 +89,15 @@ const loadComponent = () => {
   //INSTRUCCIONES
   //LO QUE QUEREMOS LLEVAR A CABO
   loader.classList.add("hide")
-  } , 3000)                            
+  } ,0)                            
    } 
   document.addEventListener('DOMContentLoaded', ()=>{
-
+    
+   
      getStorageInfo()
       loadComponent()
+      
+ 
   })
 
 
@@ -128,19 +137,26 @@ darkThemeChange()
 
 const getStorageInfo = ()=>{
 
+  let spanShow = window.localStorage.getItem("counter")
 let cart = window.localStorage.getItem("cartProduct")
-if(cart){
+if(cart && spanShow){
 
 cart = JSON.parse(cart)
+spanShow = JSON.parse(spanShow)
 //MOSTRAR PRODUCTOS EN VENTANA--------------------------------------------------
-
+spanCounter.textContent=  spanShow
   const content = document.getElementById("cart-content2") 
+  const content2= document.getElementById("item-q")
+  const content3= document.getElementById("item-p")
+  
   content.classList.add('cart-content2')
   let cadena =""
-  cart.map(product => {
-         var ide = product.id
-        
-         
+  let cadena2=""
+  let cadena3=""
+  
+   cart.map((product) => {
+     (product.price * product.quantitySelected)
+                        
   cadena +=  `<div class="art-class"><div class="photo" id="cart-content">
   <img class="featured" src="${product.image}" alt="">
   <span class="id">id: ${product.id}</span></div>
@@ -154,25 +170,32 @@ cart = JSON.parse(cart)
   <span class="sub">Subtotal:$ ${product.price * product.quantitySelected}</span>
   <div class="plus-minus"><span class="minus" id="minus">-</span>
   <span>${product.quantitySelected} units</span>
-  <span class="pl" id="pl">+</span>
-  <img class="caneca" id="caneca" src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""></div>
+  <span id="pl">+</span>
+  <img class="caneca caneca2 caneca3" id="caneca" src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""></div>
   </div></div>`
+  cadena2 = `<h2 id="item-q"> 0 items</h2>`
+cadena3 =`<div class="gcheck"><h2 id="item-p">$$</h2>`
 
- 
-  content.innerHTML = cadena
+
   
-  })
+  content.innerHTML = cadena
+content2.innerHTML = cadena2
+content3.innerHTML = cadena3
 
 
+  }) 
+  
 
-} else{window.localStorage.setItem("cartProduct", JSON.stringify([]))}}
+} else{window.localStorage.setItem("cartProduct", JSON.stringify([]))
+window.localStorage.setItem('counter', JSON.stringify(0))
+}}
 
 
 //AGREGAR A CARRITO------------------------------------------------------
 
 
 function addProduct(itemId){
-  let acc=0;
+ 
 let cartActual = JSON.parse(window.localStorage.getItem("cartProduct"))
 
 
@@ -184,8 +207,8 @@ let cartActual = JSON.parse(window.localStorage.getItem("cartProduct"))
   let index = cartActual.indexOf(productSelected)
  
   cartActual[index].quantitySelected++
-  acc = acc + 1
-  stockW.textContent = acc
+ 
+  
  
       if(cartActual[index].quantitySelected > cartActual[index].quantity){
         cartActual[index].quantitySelected = cartActual[index].quantity
@@ -193,12 +216,18 @@ let cartActual = JSON.parse(window.localStorage.getItem("cartProduct"))
       }
 
    }else{
-   
+    
+    let counterStorage = JSON.parse(window.localStorage.getItem("counter"))
+    counterStorage = counterStorage + 1
+    spanCounter.textContent = counterStorage
+    
+    window.localStorage.setItem("counter", JSON.stringify(counterStorage))
+  
       const item = items.find(product=> product.id ===itemId)
       item.quantitySelected = 1;
     cartActual.push(item)
-    acc  = acc+1
-    stockW.textContent = acc
+    
+    
     
    } 
        console.log(cartActual)
@@ -209,31 +238,38 @@ let cartActual = JSON.parse(window.localStorage.getItem("cartProduct"))
 
 // FUNCTION SUM  Y MIN  Reflejada en ventana de carrito
 
-let counter=0; 
-
-
-function sum(e){
-  counter = counter+1
-  spanCounter.textContent = counter
- addProduct(e)
-
-  }
-
-  function min(e){
-    counter = counter-1
-    spanCounter.textContent = counter
-    addProduct(e)
-
-    }
-
 function eliminar(){
   
   window.localStorage.clear()
+  spanCounter.textContent = 0
   const content = document.getElementById("cart-content2") 
-  content.innerHTML=""
+  content.innerHTML= ` <div class="emtpy1" id="empty1">
+  <h1>My cart</h1>
+<img src="./images/empty-cart.png" alt="">
+ <p>Your cart is empty
+  You can add items to your cart by clicking on the "" 
+  button on the product page.</p>
+</div>`
+getStorageInfo()
 }
 
+function clickSpan(){ 
+  let cart = window.localStorage.getItem("cartProduct")
+if(cart){
 
+cart = JSON.parse(cart)
+  cart.map(product => {
+    let ide = product.id
+    if(ide === 1){
+    clickPlus4.classList.add("pl")
+ }
+ else if(ide ===2){
+   clickPlus5.classList.add("pl2")
+ }
+ else if(ide ===3){
+   clickPlus6.classList.add("pl3")}
+ })
+}}
 
 
 //---------------------EVENTOS----------------------------//
@@ -254,10 +290,11 @@ menuBtnClose.addEventListener("click", e=> menuContainer.classList.add("hide") )
 
 // evento plus Reflejado en ventana de Carrito 
     
-clickPlus.addEventListener("click", ()=> sum(1) )
-clickPlus2.addEventListener("click", ()=> sum(2) )
-clickPlus3.addEventListener("click", ()=> sum(3) )
-    
+clickPlus.addEventListener("click", ()=> {addProduct(1)} )
+clickPlus2.addEventListener("click", ()=> {addProduct(2)} )
+clickPlus3.addEventListener("click", ()=> {addProduct(3) })
+ 
+
 //eliminar TODO
 
 checkBtn.addEventListener("click", ()=> {
