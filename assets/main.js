@@ -89,7 +89,7 @@ const loadComponent = () => {
   //INSTRUCCIONES
   //LO QUE QUEREMOS LLEVAR A CABO
   loader.classList.add("hide")
-  } ,3000)                            
+  } ,0)                            
    } 
   document.addEventListener('DOMContentLoaded', ()=>{
     
@@ -153,9 +153,15 @@ spanCounter.textContent=  spanShow
   let cadena =""
   let cadena2=""
   let cadena3=""
-  
+  let acu= 0
+  let acuPrice= 0
+  for(let i=0; i<cart.length; i++){
+ acu= acu + cart[i].quantitySelected
+  acuPrice = acuPrice+ (cart[i].price * cart[i].quantitySelected)
+  }stockW.textContent = acu+' '+"units"
+    priceW.textContent= "$"+acuPrice+" "+"dls."
    cart.map((product) => {
-     (product.price * product.quantitySelected)
+     
                         
   cadena +=  `<div class="art-class"><div class="photo" id="cart-content">
   <img class="featured" src="${product.image}" alt="">
@@ -173,14 +179,12 @@ spanCounter.textContent=  spanShow
   <span id="pl">+</span>
   <img class="caneca caneca2 caneca3" id="caneca" src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""></div>
   </div></div>`
-  cadena2 = `<h2 id="item-q"> 0 items</h2>`
-cadena3 =`<div class="gcheck"><h2 id="item-p">$$</h2>`
+ 
 
 
   
   content.innerHTML = cadena
-content2.innerHTML = cadena2
-content3.innerHTML = cadena3
+
 
 
   }) 
@@ -241,6 +245,8 @@ let cartActual = JSON.parse(window.localStorage.getItem("cartProduct"))
 function eliminar(){
   
   window.localStorage.clear()
+  stockW.textContent = 0+' '+"units"
+    priceW.textContent= "$"+0.00+" "+"dls."
   spanCounter.textContent = 0
   const content = document.getElementById("cart-content2") 
   content.innerHTML= ` <div class="emtpy1" id="empty1">
