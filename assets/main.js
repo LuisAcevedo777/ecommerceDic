@@ -34,8 +34,10 @@ const clickPlusMinus = document.querySelector("div.plus-minus")
 const stockW = document.querySelector("#item-q")
 const priceW = document.querySelector("#item-p")
 
+//llamado a barra navegacion
 
-
+const navegacion = document.getElementById("navbar")
+const firstTitle = document.getElementById("h2primer")
 //---------------------ARRAY----------------------------//
 
 
@@ -92,12 +94,32 @@ const loadComponent = () => {
   document.addEventListener('DOMContentLoaded', ()=>{
     
    
-     getStorageInfo()
+     
       loadComponent()
-      
+      getStorageInfo()
  
   })
+//cambiar color barra navegacion con el scroll
+function changeNav(){
+ let distanciaScroll = document.documentElement.scrollTop;
+ let alturaNav = firstTitle.offsetTop;
 
+ if(distanciaScroll > alturaNav){
+  navegacion.classList.add('navbar2')}
+else if(distanciaScroll - alturaNav === 0){navegacion.classList.add('navbar')}
+
+
+console.log(distanciaScroll)
+console.log(alturaNav)
+console.log("----------------------")
+} window.addEventListener("scroll", changeNav)
+/*//cambiar color barra navegacion con el scroll
+function changeNav(){
+  
+   navegacion.classList.add('navbar2', 'navbar')
+ }
+ window.addEventListener("scroll", changeNav)*/
+ 
 
 
 //cambiar a tema oscuro---------------------------------------------------------
@@ -175,7 +197,7 @@ spanCounter.textContent=  spanShow
   <div class="plus-minus"><button class="btn"onclick="minusDirect(${product.id})">-</button>
   <span>${product.quantitySelected} units</span>
   <button class="btn" onclick="plusDirect(${product.id});">+</button>
-  <img class="caneca" src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""></div>
+  <img src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""<button class="btn2" onclick="deleteDirect(${product.id});"></button></div>
   </div></div>`
  
   content.innerHTML = cadena
@@ -250,6 +272,28 @@ function eliminar(){
   button on the product page.</p>
 </div>`
 getStorageInfo()
+}
+
+function deleteDirect(a){
+
+  let consulta = JSON.parse(window.localStorage.getItem("cartProduct"))
+   let variable = consulta.filter(product => product.id !== a)
+  window.localStorage.setItem("cartProduct", JSON.stringify(variable))
+
+  
+  let count = JSON.parse(window.localStorage.getItem("counter"))
+  if(count === 1){ 
+    eliminar()
+    count = count - 1
+    getStorageInfo()
+    console.log(variable)
+  }
+  else{ 
+  count = count - 1}
+  spanCounter.textContent = count
+  window.localStorage.setItem("cartProduct", JSON.stringify(variable))
+  window.localStorage.setItem("counter", JSON.stringify(count))
+  getStorageInfo()
 }
 
 function plusDirect(a){

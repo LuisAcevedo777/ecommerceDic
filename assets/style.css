@@ -59,20 +59,42 @@ body.dark{
 
 }
 
+
+
 img{
 max-width: 100%;
 display: block;
 
 }
 
+
 .navbar{
+  background-color:transparent;
+  position: fixed;
+  width: 100%;
 display: flex;
 padding: 1rem 1.5rem;
 justify-content: space-between;
 align-items: center;
 box-shadow: 0 1px 4px #2825251a;
 color: var(--title-color);
+margin-bottom: 2rem;
+z-index: 10;
 }
+.navbar2{
+  background-color: var(--container-color);
+  position: fixed;
+  width: 100%;
+display: flex;
+padding: 1rem 1.5rem;
+justify-content: space-between;
+align-items: center;
+box-shadow: 0 1px 4px #2825251a;
+color: var(--title-color);
+margin-bottom: 2rem;
+z-index: 10;
+}
+
 .nav-logo{
 width: 50px;
 fill: hsl(354, 78%, 60%);
@@ -82,7 +104,6 @@ div.menu-special{
   display: none;
 }
 .icons-wrapper{
-
 display: flex;
 gap: 1rem;
 align-items: center;
@@ -162,10 +183,15 @@ align-items: center;
 gap: 2rem;
 margin-top: 4rem;
 }
-li.home1{
-  color: var(--first-color);
-}
 
+a.hiper1{
+  text-decoration: none;
+  color: var(--text-color);
+}
+a.home1{
+  color: var(--text-color);
+  text-decoration: none;
+}
 
 /*ventana carrito*/
 .cart-container{
@@ -240,7 +266,7 @@ div.cart-content2{
 }
 div.fathprod{
   width:100%;
-  
+  padding-top: 8rem;
   background-color: transparent;
     display: flex;
     flex-direction: row;
@@ -324,6 +350,18 @@ div.art-class{
   justify-content: space-evenly;
 }
 
+button.btn{
+  background-color: red;
+  width: 1rem;
+  height: 1rem;
+}
+button.btn:active{
+  background-color: greenyellow;
+  width:1rem;
+  height: 1.5rem;
+}
+
+
   /*SECTION 2*/
 
   section.dos{
@@ -370,6 +408,12 @@ margin-top: 2rem;
 
     width: 10rem;
   }
+  img.featured1:hover{
+    cursor: pointer;
+    margin-top: -2rem;
+    background-color: red;
+  }
+
   div.description{
    display: flex;
    flex-direction: row;
@@ -383,9 +427,7 @@ margin-top: 2rem;
     height: 1rem;
     width: 0.1rem;
   }
-span.pl{color: red;}
-span.pl2{color: blue;}
-span.pl3{color: green;}
+
 
   span.plus{
    top: 8rem;
@@ -403,20 +445,6 @@ span.pl3{color: green;}
     border-color: var(--border-color);
   }
 
-  span.plus:hover{
-    cursor: pointer;
-    background-color:red;
-}
-span.plus:hover{
- cursor: pointer;
- background-color: red;
-}
-span.plus:hover{
-cursor: pointer;
-background-color: red;
-}
-
-
   span.plus:active{
        cursor: pointer;
        background-color: greenyellow;
@@ -431,18 +459,11 @@ background-color: greenyellow;
 }
   /*section 3*/
 
-  section.tres{
-
-    background-color: var(--card-color);
-    height: 20rem;
-    margin-bottom: 0;
-  }
-  /*section 3*/
 
   section.tres{
 margin-top: 0;
     background-color: var(--card-color);
-    height: 48rem;
+    height: 45rem;
     margin-bottom: 0;
   }
 
@@ -599,16 +620,17 @@ height: 30rem;
         }
 
         .principal-content{
+          padding: 6rem;
 
              display: flex; 
              flex-direction: row-reverse;
-            ;
+            
                      }
         body.dark{
           --first-color: hsl(182, 53%, 74%);
           --button-color: hsl(246, 16%, 12%);
           --button-color-alt: hsl(0, 0%, 28%);
-          --card-color: hsla(246, 16%, 5%, .5);
+          --card-color: rgba(127, 127, 150, 0.5);
           --title-color: hsl(0, 0%, 95%);
           --text-color: hsl(0, 0%, 75%);
           --body-color: hsl(249, 19%, 14%);
@@ -620,17 +642,38 @@ height: 30rem;
         img{
         max-width: 100%;
         display: block;
-        
+        color: blue;
         }
         
+        
         .navbar{
+          background-color: transparent;
+          position: fixed;
+          width: 100%;
         display: flex;
         padding: 1rem 1.5rem;
         justify-content: space-between;
         align-items: center;
         box-shadow: 0 1px 4px #2825251a;
         color: var(--title-color);
+        margin-bottom: 2rem;
+        z-index: 10;
         }
+        .navbar2{
+          background-color: var(--container-color);
+          position: fixed;
+          width: 100%;
+        display: flex;
+        padding: 1rem 1.5rem;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 1px 4px #2825251a;
+        color: var(--title-color);
+        margin-bottom: 2rem;
+        z-index: 10;
+        }
+
+
         .nav-logo{
         width: 50px;
         fill: hsl(354, 78%, 60%);
@@ -638,11 +681,12 @@ height: 30rem;
         }
         
         .icons-wrapper{
-        
+        padding-right:  6rem;
         display: flex;
         gap: 1rem;
         align-items: center;
-        z-index: 10;
+        z-index: 50;
+        
         }
         
         main{
@@ -669,16 +713,7 @@ height: 30rem;
         
         .menu-container{
         
-          background-color: rgba(211, 211, 211, 0.378);
-          width: 100%;
-          height: 100%;
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 50;
-          transition: left .3s linear;
-          padding: 2.5rem 1.5rem 1rem 1.5rem;
-          z-index: 15;
+         display: none;
           }
         
         
@@ -721,10 +756,88 @@ height: 30rem;
         margin-top: 1.3rem;
         
         }
-        li.home1{
+        
+        a.hiper1{
+          text-decoration: none;
+          color: var(--text-color);
+        }
+        a.hiper1:hover{
+          text-decoration: none;
           color: var(--first-color);
         }
+
+        a.home1{
+          color: var(--text-color);
+          text-decoration: none;
+        }
         
+        
+        a.home1:hover{
+          color: var(--first-color);
+          text-decoration: none;
+        }
+        div.fathprod{
+          width:100%;
+          
+          background-color: transparent;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            z-index: 9;
+          }
+          
+          div.prod{
+            width: 31rem;
+            height: 46rem;
+            margin-top: -8rem;
+            background-color: var(--first-color) ;
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+            align-items: flex-end;
+            z-index: 0;
+          }
+        
+          span.price{
+            color: var(--first-color);
+            margin-left: 1rem;
+            margin-top: -2rem;
+            font-size: 20px;
+            
+          }
+          div.buttons{
+            display: flex;
+            flex-direction: row;
+            justify-content: inherit;
+        margin-top: 3rem;
+        height: 5rem;
+          }
+        
+          .discovery{
+            height: 4rem;
+            width: 7rem;
+            background-color: var(--text-color-light);
+            color: var(--title-color);
+            font-size: 17px;
+        font-style: initial;
+        margin-right: 0;
+          }
+          .add-cart{
+            height: 5rem;
+            width: 11rem;
+            background-color: var(--button-color-alt);
+        color: var(--card-color);
+        font-size: 20px;
+        font-style: bold;
+        margin-left: 0;
+          }
+          button.add-cart:hover{
+            cursor: pointer;
+            background-color: var(--first-color);
+            color: var(--text-color);
+          }
+
+
         
         /*ventana carrito*/
           span.check{position: static;
@@ -744,7 +857,7 @@ height: 30rem;
           z-index: 10;
           }
         
-        
+    
         
         .cart-container.hide{
         z-index: 10;
@@ -802,67 +915,9 @@ height: 30rem;
           align-items: centers;
         }
         
-        div.fathprod{
-          width:100%;
+        
+        
           
-          background-color: transparent;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
-            z-index: 3;
-          }
-          
-          div.prod{
-            width: 17rem;
-            height: 31rem;
-            margin-top: -8rem;
-            background-color: var(--first-color) ;
-            display: flex;
-            flex-direction: row;
-            justify-content:center;
-            align-items: flex-end;
-            z-index: 3;
-          }
-        
-          span.price{
-            color: var(--first-color);
-            margin-left: 1rem;
-            margin-top: -2rem;
-            font-size: 20px;
-            
-          }
-          div.buttons{
-            display: flex;
-            flex-direction: row;
-            justify-content: inherit;
-        margin-top: 3rem;
-        height: 5rem;
-          }
-        
-          .discovery{
-            height: 4rem;
-            width: 7rem;
-            background-color: var(--text-color-light);
-            color: var(--title-color);
-            font-size: 17px;
-        font-style: initial;
-        margin-right: 0;
-          }
-        
-          .add-cart{
-            height: 5rem;
-            width: 11rem;
-            background-color: var(--button-color-alt);
-        color: var(--card-color);
-        font-size: 20px;
-        font-style: bold;
-        margin-left: 0;
-          }
-          button.add-cart:hover{
-            cursor: pointer;
-            background-color: var(--first-color);
-            color: var(--text-color);
-          }
 
           div.foot{
             margin-top: 58rem;
@@ -905,6 +960,26 @@ height: 30rem;
               height: 1.5rem;
             }
             
+          img.caneca{
+            width: 1rem;
+            height: 1rem;
+            margin-left: 2rem;
+            margin-top: -0.5rem;
+            color: greenyellow;
+          }
+
+            
+          img.caneca:hover{
+            width: 1rem;
+            height: 1rem;
+            margin-left: 2rem;
+            margin-top: -0.5rem;
+           
+          }
+
+          button.btn2{width: 0.2;
+          height: 0.2;
+        background-color: yellow;}
           /*SECTION 2*/
         
           section.dos{
@@ -958,10 +1033,15 @@ height: 30rem;
           }
         
           img.featured1{
-        
             width: 10rem;
           }
-        
+          img.featured1:hover{
+            cursor: pointer;
+            margin-top: -2rem;
+            background-color: red;
+          }
+
+
           div.description{
            display: flex;
            flex-direction: row;
@@ -975,10 +1055,7 @@ height: 30rem;
             height: 1rem;
             width: 0.1rem;
           }
-          span.pl{color: red;}
-          span.pl2{color: blue;}
-          span.pl3{color: green;}
-          
+                  
           span.plus{
            top: 8rem;
             border-radius: 50%;
@@ -1031,7 +1108,7 @@ height: 30rem;
           }
         
           div.g4{
-           
+           margin-top: -2.5rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -1053,6 +1130,9 @@ height: 30rem;
           }
           h3{
             font-size: 16px;
+          }
+          h2:hover{
+            color: red;
           }
           img.facebook{
            margin-top: -0.5rem;
