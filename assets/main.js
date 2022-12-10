@@ -17,7 +17,7 @@ const minusBtn = document.getElementById("minus")
 //eliminar
 
 const deleteUnited = document.getElementById("cart-content")
-const caneca = document.getElementById("caneca")
+const caneca = document.getElementsByClassName("caneca")
 
 const checkBtn = document.getElementById("check")
 //conteo de click
@@ -27,9 +27,7 @@ const clickPlus = document.querySelector("span.plus")
 const clickPlus2 = document.querySelector("span.dos")
 const clickPlus3 = document.querySelector("span.tres")
 
-const clickPlus4 = document.querySelector("span.pl")
-const clickPlus5 = document.querySelector("span.pl2")
-const clickPlus6 = document.querySelector("span.pl3")
+const clickPlusMinus = document.querySelector("div.plus-minus")
 
 
 // llamado en ventana ( quantitieSelected, price, checkout)
@@ -174,18 +172,13 @@ spanCounter.textContent=  spanShow
   <span class="price2">$${product.price}</span>
   </div>
   <span class="sub">Subtotal:$ ${product.price * product.quantitySelected}</span>
-  <div class="plus-minus"><span class="minus" id="minus">-</span>
+  <div class="plus-minus"><button class="btn"onclick="minusDirect(${product.id})">-</button>
   <span>${product.quantitySelected} units</span>
-  <span id="pl">+</span>
-  <img class="caneca caneca2 caneca3" id="caneca" src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""></div>
+  <button class="btn" onclick="plusDirect(${product.id});">+</button>
+  <img class="caneca" src="./images/household_chores_taking_out_trash_garbage_can_icon_133380.svg" alt=""></div>
   </div></div>`
  
-
-
-  
   content.innerHTML = cadena
-
-
 
   }) 
   
@@ -259,23 +252,43 @@ function eliminar(){
 getStorageInfo()
 }
 
-function clickSpan(){ 
-  let cart = window.localStorage.getItem("cartProduct")
-if(cart){
+function plusDirect(a){
+  addProduct(a)
+}
 
-cart = JSON.parse(cart)
-  cart.map(product => {
-    let ide = product.id
-    if(ide === 1){
-    clickPlus4.classList.add("pl")
- }
- else if(ide ===2){
-   clickPlus5.classList.add("pl2")
- }
- else if(ide ===3){
-   clickPlus6.classList.add("pl3")}
- })
-}}
+function minusDirect(a){
+
+    let cartActual = JSON.parse(window.localStorage.getItem("cartProduct"))
+    
+    
+        //condicion para saber si se puede Quitar otro producto
+    
+      let productSelectedMinus = cartActual.find(product => product.id === a)
+    
+       if(productSelectedMinus){
+      let index = cartActual.indexOf(productSelectedMinus)
+     
+      cartActual[index].quantitySelected--
+     
+      
+     
+          if(cartActual[index].quantitySelected < 0){
+            cartActual[index].quantitySelected = 0            
+          }
+    
+       }else{
+        
+        let counterStorageMinus = JSON.parse(window.localStorage.getItem("counter"))
+        counterStorageMinus = counterStorageMinus - 1
+        spanCounter.textContent = counterStorageMinus
+        
+        window.localStorage.setItem("counter", JSON.stringify(counterStorage))
+      
+       } 
+            
+      window.localStorage.setItem("cartProduct",JSON.stringify(cartActual))
+      getStorageInfo()
+    }
 
 
 //---------------------EVENTOS----------------------------//
