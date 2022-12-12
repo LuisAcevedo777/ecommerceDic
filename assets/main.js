@@ -225,13 +225,18 @@ let cartActual = JSON.parse(window.localStorage.getItem("cartProduct"))
    if(productSelected){
   let index = cartActual.indexOf(productSelected)
  
+  counterStorage = JSON.parse(window.localStorage.getItem("counter"))
+  counterStorage = counterStorage + 1
+  spanCounter.textContent = counterStorage
+  
+  window.localStorage.setItem("counter", JSON.stringify(counterStorage))
+
   cartActual[index].quantitySelected++
  
   
  
-      if(cartActual[index].quantitySelected > cartActual[index].quantity){
-        cartActual[index].quantitySelected = cartActual[index].quantity
-                       
+      if(cartActual[index].quantitySelected > cartActual[index].quantity ){
+        cartActual[index].quantitySelected = cartActual[index].quantity           
       }
 
    }else{

@@ -475,7 +475,8 @@ margin-top: 0;
     justify-content: space-evenly;
   }
   div.redes{
-
+margin-top: 3rem;
+margin-left: -1rem;
     display: flex;
     flex-direction: row;
     justify-content:flex-start;
@@ -485,9 +486,10 @@ margin-top: 0;
     font-size: 16px;
   }
   img.facebook{
-
+   margin-top: -0.5rem;
     width: 2.2rem;
   }
+
   /*contenido carrito*/
 div.general{
 
