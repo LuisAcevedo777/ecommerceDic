@@ -89,7 +89,7 @@ const loadComponent = () => {
   //INSTRUCCIONES
   //LO QUE QUEREMOS LLEVAR A CABO
   loader.classList.add("hide")
-  } , 3000)                            
+  } ,3000)                            
    } 
   document.addEventListener('DOMContentLoaded', ()=>{
     
@@ -278,16 +278,15 @@ getStorageInfo()
 function deleteDirect(a){
 
   let consulta = JSON.parse(window.localStorage.getItem("cartProduct"))
-   let variable = consulta.filter(product => product.id !== a)
-  window.localStorage.setItem("cartProduct", JSON.stringify(variable))
-
   
+   let variable = consulta.filter(product => consulta.length > 1 && product.id !== a)
+  window.localStorage.setItem("cartProduct", JSON.stringify(variable))
+  getStorageInfo()
+ 
   let count = JSON.parse(window.localStorage.getItem("counter"))
-  if(count === 1){ 
+  if(count === 0){ 
     eliminar()
-    count = count - 1
-    getStorageInfo()
-    console.log(variable)
+     
   }
   else{ 
   count = count - 1}
