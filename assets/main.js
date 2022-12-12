@@ -164,7 +164,7 @@ if(cart && spanShow){
 cart = JSON.parse(cart)
 spanShow = JSON.parse(spanShow)
 //MOSTRAR PRODUCTOS EN VENTANA--------------------------------------------------
-spanCounter.textContent=  spanShow
+
   const content = document.getElementById("cart-content2") 
   const content2= document.getElementById("item-q")
   const content3= document.getElementById("item-p")
@@ -179,6 +179,8 @@ spanCounter.textContent=  spanShow
  acu= acu + cart[i].quantitySelected
   acuPrice = acuPrice+ (cart[i].price * cart[i].quantitySelected)
   }stockW.textContent = acu+' '+"units"
+  spanCounter.textContent = acu
+  window.localStorage.setItem("counter", JSON.stringify(acu))
     priceW.textContent= "$"+acuPrice+" "+"dls."
    cart.map((product) => {
      
@@ -225,19 +227,13 @@ let cartActual = JSON.parse(window.localStorage.getItem("cartProduct"))
    if(productSelected){
   let index = cartActual.indexOf(productSelected)
  
-  counterStorage = JSON.parse(window.localStorage.getItem("counter"))
-  counterStorage = counterStorage + 1
-  spanCounter.textContent = counterStorage
-  
-  window.localStorage.setItem("counter", JSON.stringify(counterStorage))
-
-  cartActual[index].quantitySelected++
- 
+   cartActual[index].quantitySelected++
   
  
-      if(cartActual[index].quantitySelected > cartActual[index].quantity ){
-        cartActual[index].quantitySelected = cartActual[index].quantity           
-      }
+      if(cartActual[index].quantitySelected > cartActual[index].quantity){
+        cartActual[index].quantitySelected = cartActual[index].quantity 
+        alert("Lo sentimos!! No hay suficientes productos en el stock")
+           }
 
    }else{
     
